@@ -1,8 +1,9 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from .forms import SinginForm, LoginForm
+from .forms import SinginForm, LoginForm, AgendamentoForm
 from .models import User, Atendimento
-from django.contrib.auth import login as login_django
+from django.contrib.auth import login as login_django, logout as logout_django
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 
 
@@ -49,3 +50,28 @@ def login(request):
         form = LoginForm()
 
     return render(request, 'login.html', {'form': form})
+
+@login_required(login_url='/login')
+def agendamento(request):
+    if request.method == 'POST':
+        form = AgendamentoForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+
+            user = request.user
+            serv = data["servico"]
+            pag = data["forma_de_pag"]
+            date = data["data_servico"]
+
+            agend = Atendimento.objects.create(servico=serv, forma_de_pag=pag, data_servico=date)
+            agend.cliente = user
+            agend.save()
+    else:
+        form = AgendamentoForm()
+
+    return render(request, 'agendamento.html', {'form': form})
+
+@login_required(login_url='/login')
+def logout(request):
+    logout_django(request)
+    return HttpResponseRedirect('/login')

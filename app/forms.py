@@ -1,7 +1,8 @@
 from django import forms
 from django.core.validators import MinLengthValidator
 from django.contrib.auth import authenticate
-from .models import User
+from .models import User, Atendimento, Servico
+from datetime import datetime
 
 class SinginForm(forms.Form):
     username = forms.CharField(label='Nome de usuario:', max_length=100, widget=forms.TextInput(attrs={'class': 'login-input'}))
@@ -44,3 +45,29 @@ class LoginForm(forms.Form):
             raise forms.ValidationError(
                 "Nome de usuário ou Senha incorreto"
             )
+
+
+class AgendamentoForm(forms.ModelForm):
+    dia = forms.CharField(widget=forms.TextInput(attrs={'class': 'login-input', 'type':'date'}))
+    horario = forms.CharField(widget=forms.TextInput(attrs={'class': 'login-input', 'type':'time'}))
+    class Meta:
+        model = Atendimento
+        fields = ['servico', 'forma_de_pag', ]
+        widgets = {
+            'servico': forms.Select(attrs={'class': 'login-button'}),
+            'forma_de_pag': forms.Select(attrs={'class': 'login-button'}),
+        }
+    def __init__(self, *args, **kwargs):
+        super(AgendamentoForm, self).__init__(*args, **kwargs)
+        self.fields['servico'].queryset = Servico.objects.filter(disp=True)
+
+    def clean(self):
+        data = super(AgendamentoForm, self).clean()
+
+        date = data['dia']
+        y, m, d = date.split('-')
+
+        hora = data['horario']
+        h, min = hora.split(':')
+
+        data['data_servico'] = datetime(int(y), int(m), int(d), int(h), int(min))
