@@ -1,6 +1,7 @@
+from decimal import Decimal
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import MinLengthValidator
+from django.core.validators import MinLengthValidator, MinValueValidator
 
 
 class User(AbstractUser):
@@ -18,3 +19,25 @@ class User(AbstractUser):
     ], blank=True)
     def __str__(self) -> str:
         return self.username
+
+
+class Servico(models.Model):
+    nome = models.CharField(max_length=30, unique=True)
+    
+    preco = models.DecimalField(verbose_name='Preço', max_digits=6, decimal_places=2, default=0, validators=[
+            MinValueValidator(Decimal('0'))
+        ])
+
+    disp = models.BooleanField(default=True)
+    def __str__(self) -> str:
+        return self.nome
+
+class Pagamento(models.Model):
+    nome = models.CharField(max_length=30, unique=True)
+    def __str__(self) -> str:
+        return self.nome
+
+class Situacao(models.Model):
+    nome = models.CharField(max_length=30, unique=True)
+    def __str__(self) -> str:
+        return self.nome
