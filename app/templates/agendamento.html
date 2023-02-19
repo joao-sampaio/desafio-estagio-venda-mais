@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="{% static 'app.js' %}"></script> 
+    <title>Limpa Bem agendamento de serviço</title>
+</head>
+<body>
+    <span class="logo">Limpa Bem</span>
+    <div class="login-form-div">
+        <h1>Agendamento</h1>
+        <form id="form" class="login-form" action="agendamento" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input class="login-button" type="submit" value="Agendar">
+            
+            <button id="redirect-button" name="logout" onclick="redirect()" type="button" class="login-button">Sair</button type="button">
+        </form>
+    </div>
+</body>
+</html>
