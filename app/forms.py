@@ -1,5 +1,6 @@
 from django import forms
 from django.core.validators import MinLengthValidator
+from django.contrib.auth import authenticate
 from .models import User
 
 class SinginForm(forms.Form):
@@ -26,4 +27,20 @@ class SinginForm(forms.Form):
         if user_exists:
             raise forms.ValidationError(
                 "Nome de usuario já exite"
+            )
+
+class LoginForm(forms.Form):
+    username = forms.CharField(label='Nome de usuario:', max_length=100, widget=forms.TextInput(attrs={'class': 'login-input'}))
+    password = forms.CharField(label='Senha:', max_length=100, widget=forms.PasswordInput(attrs={'class': 'login-input'}), min_length=8)
+    def clean(self):
+        data = super(LoginForm, self).clean()
+        password = data.get("password")
+        username = data.get("username")
+
+        user_exists = authenticate(username=username, password=password)
+        if user_exists:
+            self.user = user_exists
+        else:
+            raise forms.ValidationError(
+                "Nome de usuário ou Senha incorreto"
             )

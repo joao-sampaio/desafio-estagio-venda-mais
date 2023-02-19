@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from .forms import SinginForm
+from .forms import SinginForm, LoginForm
 from .models import User, Atendimento
 from django.contrib.auth import login as login_django
 from django.contrib.auth.models import Group
@@ -34,3 +34,18 @@ def cadastro(request):
         form = SinginForm()
 
     return render(request, 'cadastro.html', {'form': form})
+
+
+def login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = form.user
+
+            login_django(request, user)
+
+            return HttpResponseRedirect('agendamento')
+    else:
+        form = LoginForm()
+
+    return render(request, 'login.html', {'form': form})
