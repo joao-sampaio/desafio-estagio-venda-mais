@@ -1,7 +1,7 @@
 # Desafio estagio Venda Mais
 
 Repositório dedicado a armazenas minha solução para o desafio
-Um webapp para uma empresa de limpesa.🧹
+Um webapp para uma empresa de limpeza.🧹
 
 # Inicio
 
