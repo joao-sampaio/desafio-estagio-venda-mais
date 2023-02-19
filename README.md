@@ -34,8 +34,8 @@ Repositório dedicado a armazenas minha solução para o desafio
   * Windons: `py -m venv .venv && .venv\Scripts\activate.bat`
 3. Instale as dependências
 
-  * Linux: `python3 -m pip install -r dev-requirements.txt`
-  * Windons: `pip install -r dev-requirements.txt`
+  * Linux: `python3 -m pip install -r requirements.txt`
+  * Windons: `pip install -r requirements.txt`
 </details>
 
 <details>
