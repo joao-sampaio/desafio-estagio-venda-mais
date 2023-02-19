@@ -12,11 +12,11 @@ class CustomUserAdmin(UserAdmin):
     form = UserChangeForm
     model = User
     list_display = ("username", 'user_type')
-    list_filter = ("username", 'user_type')
+    list_filter = ('user_type', 'is_staff')
     fieldsets = (
         (None, {"fields": ("username", "password")}),
         (("Personal info"), {"fields": ("first_name", "last_name", "email", "endereco", "telefone")}),
-        ("Permissions", {"fields": ("is_active","groups",)}),
+        ("Permissions", {"fields": ("is_active", "groups", 'is_staff')}),
         ("Tipo", {"fields": ("user_type",)}),
         (("Important dates"), {"fields": ("last_login", "date_joined")}),
     )
@@ -25,7 +25,7 @@ class CustomUserAdmin(UserAdmin):
             "classes": ("wide",),
             "fields": (
                 "username", "password1", "password2",
-                "is_active",
+                "is_active", 'is_staff'
             )}
         ),
     )
@@ -33,7 +33,7 @@ class CustomUserAdmin(UserAdmin):
     ordering = ("username",)
     def get_readonly_fields(self, request, obj=None):
         if request.user.user_type < 5:
-            return self.readonly_fields + ('user_type', 'groups')
+            return self.readonly_fields + ('user_type', 'groups', 'is_staff')
         return self.readonly_fields
     def save_model(self, request, obj, form, change) -> None:
         super().save_model(request, obj, form, change)
@@ -46,7 +46,7 @@ class CustomUserAdmin(UserAdmin):
         elif request.user.user_type == 5:
             group = Group.objects.get(name='Gerentes')
             group.user_set.add(obj)
-            obj.user_type
+            obj.is_staff = True
             obj.save()
     def get_queryset(self, request):
         qs = super(CustomUserAdmin, self).get_queryset(request)
@@ -91,6 +91,10 @@ class AtendimentoAdmin(admin.ModelAdmin):
     list_display_links = ('__str__',)
     readonly_fields = ('valor_pago', 'cliente')
     list_filter = ('data_servico', 'situacao')
+    def get_readonly_fields(self, request, obj=None):
+        if request.user.user_type < 4:
+            return self.readonly_fields + ('desconto',)
+        return self.readonly_fields
     def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
         if db_field.name == "atendente":
             kwargs["queryset"] = User.objects.filter(user_type=3)
