@@ -5,6 +5,8 @@ from .models import User, Atendimento
 from django.contrib.auth import login as login_django, logout as logout_django
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from django.db.models import Sum
+from datetime import date
 
 
 def cadastro(request):
@@ -75,3 +77,20 @@ def agendamento(request):
 def logout(request):
     logout_django(request)
     return HttpResponseRedirect('/login')
+
+
+@login_required(login_url='/login')
+def report(request):
+    if request.user.user_type < 3:
+        return HttpResponseRedirect('/admin')
+
+    today = date.today()
+    temp = Atendimento.objects.filter(data_servico__contains=today, situacao__nome='Realizado')
+    servicos = [a.__str__() for a in temp]
+
+    total = Atendimento.objects.filter(situacao='Realizado').aggregate(Sum('valor_pago'))['valor_pago__sum']
+    if not total:
+        total = 0
+    report = {'servicos': servicos, 'total': total}
+
+    return render(request, 'relatorio.html', {'report': report})

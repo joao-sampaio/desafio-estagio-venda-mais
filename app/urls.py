@@ -8,4 +8,6 @@ urlpatterns = [
     path('logout', views.logout),
 
     path('agendamento', views.agendamento),
+
+    path('relatorio', views.report),
 ]
