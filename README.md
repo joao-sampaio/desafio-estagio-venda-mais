@@ -111,6 +111,7 @@ Através do formulário disponível em http://localhost:8000/cadastro
 
 ### Agendamento
 Através do formulário disponível em http://localhost:8000/agendamento
+* É necessário estar logado para poder acessar essa pagina
 
 ---
 
