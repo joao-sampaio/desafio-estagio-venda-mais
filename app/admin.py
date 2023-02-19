@@ -5,7 +5,6 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.utils.safestring import mark_safe
 
-# Register your models here.
 
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
@@ -57,8 +56,11 @@ class CustomUserAdmin(UserAdmin):
             qs = qs.filter(user_type=2)
         return qs
 
+
 admin.site.register(Situacao)
+
 admin.site.register(Pagamento)
+
 
 @admin.register(Servico)
 class ServicoAdmin(admin.ModelAdmin):
