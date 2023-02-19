@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import Pagamento, Servico, User, Situacao
+from .models import Atendimento, Pagamento, Servico, User, Situacao
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.utils.safestring import mark_safe
 
 # Register your models here.
 
@@ -76,3 +77,27 @@ class ServicoAdmin(admin.ModelAdmin):
         if request.user.user_type < 4:
             obj.desconto = 0
         super().save_model(request, obj, form, change)
+
+
+red = '<p style="color:red;">'
+green = '<p style="color:green;">'
+yellow = '<p style="color:yellow;">'
+colors = {'Cancelado': red, 'Pendente': yellow, 'Realizado': green}
+@admin.register(Atendimento)
+class AtendimentoAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'atendente', 'color_status')
+    list_display_links = ('__str__',)
+    readonly_fields = ('valor_pago', 'cliente')
+    list_filter = ('data_servico', 'situacao')
+    def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
+        if db_field.name == "atendente":
+            kwargs["queryset"] = User.objects.filter(user_type=3)
+        elif db_field.name == "helper":
+            kwargs["queryset"] = User.objects.filter(user_type=2)
+        elif db_field.name == "servico":
+            if request.user.user_type < 4:
+                kwargs["queryset"] = Servico.objects.filter(disp=True)
+        return super(AtendimentoAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+    def color_status(self, obj): 
+        color = colors[str(obj.situacao)]
+        return mark_safe(f'{color}{obj.situacao}</p>')
