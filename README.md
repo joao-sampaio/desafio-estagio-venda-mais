@@ -1,6 +1,7 @@
 # Desafio estagio Venda Mais
 
 Repositório dedicado a armazenas minha solução para o desafio
+Um webapp para uma empresa de limpesa.🧹
 
 # Inicio
 
@@ -12,7 +13,7 @@ Repositório dedicado a armazenas minha solução para o desafio
 
 ---
 
-# Requisitos
+# Requisitos🚨
 
 1. python3 - https://www.python.org/
 2. pip
@@ -20,10 +21,10 @@ Repositório dedicado a armazenas minha solução para o desafio
 
 ---
 
-# Antes de Começar
+# Antes de Começar⚙
 
 <details>
-  <summary><strong>Configurando o projeto na sua máquina</strong></summary><br />
+  <summary><strong>Configurando o projeto na sua máquina💻</strong></summary><br />
 1. Clone o repositório
 
   * Use o comando: `git clone git@github.com:joao-sampaio/desafio-estagio-venda-mais.git`
@@ -53,7 +54,7 @@ Repositório dedicado a armazenas minha solução para o desafio
 
 ---
 
-# Entendendo o sistema
+# Entendendo o sistema🧐
 
 ## Hierarquia de usuários
 O sistema organiza os usuários em uma hierarquia de permissões que vai de um a cinco, sendo 5 o administrador e 1 o cliente. Cada tipo de usuário possui permissões diferentes, excerto o administrador, que possui todas.
@@ -65,11 +66,11 @@ O sistema organiza os usuários em uma hierarquia de permissões que vai de um a
 
 ## A seguir uma explicação do fluxo de cada tipo de usuário:
 
-### Admin
+### Admin👨‍💻
 O usuário com maior nível na hierarquia, pode ver e modificar toda a aplicação.
 > Existe apenas um admin cadastrado.
 
-### Gerente
+### Gerente🤵
 Usuário de nível 4, pode:
 
 * Gerenciar, criar e definir a disponibilidade de serviços
@@ -78,7 +79,7 @@ Usuário de nível 4, pode:
 
 > Existem 2 gerentes cadastrados
 
-### Atendente
+### Atendente👨‍💼
 Usuário de nível 3, pode:
 
 * Gerenciar Atendimentos
@@ -86,11 +87,11 @@ Usuário de nível 3, pode:
  
 > Existem 3 gerentes cadastrados
 
-### Helpers
+### Helpers👨‍🏭
 Usuário de nível 2, não tem permissões especiais, mas pode acessar a área administrativa
 > Existem 4 helpers cadastrados
 
-### Cliente
+### Cliente🙍‍♂️
 Usuário de primeiro nível, não tem permissão de acessar a área administrativa, mas pode:
 
 * Cadastrar-se
@@ -100,7 +101,7 @@ Usuário de primeiro nível, não tem permissão de acessar a área administrati
 
 ---
 
-## Fluxo do Cliente
+## Fluxo do Cliente🙍‍♂️
 
 ### Cadastro
 Através do formulário disponível em http://localhost:8000/cadastro
@@ -126,7 +127,7 @@ Através do formulário disponível em http://localhost:8000/admin
 #### Nesse momento o fluxo se divide em tipos de usuários:
 
 <details>
-  <summary><strong>Gerentes</strong></summary><br />
+  <summary><strong>Gerentes🤵</strong></summary><br />
 
 * username: gerenteN sendo N o número do funcionários(2 >= N >= 1) senha: gggg1234
 
@@ -135,7 +136,7 @@ Através do formulário disponível em http://localhost:8000/admin
 </details>
 
 <details>
-  <summary><strong>Atendentes</strong></summary><br />
+  <summary><strong>Atendentes👨‍💼</strong></summary><br />
 
 * username: atendetenteN sendo N o número do funcionário(3 >= N >= 1) senha: aaaa1234
 
@@ -144,7 +145,7 @@ Através do formulário disponível em http://localhost:8000/admin
 </details>
 
 <details>
-  <summary><strong>Helpers</strong></summary><br />
+  <summary><strong>Helpers👨‍🏭</strong></summary><br />
 
 * username: helperN sendo N o numero do funcionário(4 >= N >= 1) senha: hhhh1234
 
@@ -153,7 +154,7 @@ Através do formulário disponível em http://localhost:8000/admin
 
 ---
 
-## Funções de relatorio
+## Funções de relatorio📃
 
 1. Funcionários com acesso à lista de atendimentos podem filtrar os resultados com base em parâmetros arbitrários, por exemplo:
 
@@ -166,6 +167,6 @@ que gera e exibe um relatório diário listando todos os atendimentos e o valor 
 
 ---
 
-# Considerações finais
+# Considerações finais📖🤔
 
 Apesar de não ter concluído todos os requisitos, estou satisfeito com o resultado do projeto/desafio. Nos últimos sete dias tive a oportunidade de adquirir um conhecimento substancial do funcionamento do django. Apesar de muito extenso, o framework é bem documentado e sua merecida popularidade possibilita que usuários menos experientes tenham sempre onde procurar por referências.
