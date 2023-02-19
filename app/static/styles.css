@@ -1,0 +1,126 @@
+body {    
+    align-items: center;
+    background: rgb(181, 235, 250);
+    color: #464646;
+    display: flex;
+    flex-direction: column;
+    font-family: sans-serif;
+    height: 100vh;
+    justify-content: center;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+@media only screen and (max-width: 600px) {
+    body {
+        font-size: larger;
+    }
+  }
+
+.logo {
+    background-color: rgb(181, 235, 250);
+    width: 100%;
+    text-align: center;
+    font-size: 3em;
+    font-weight: 900;
+    padding: 21px;
+    margin-bottom: 7%;
+    animation: contrast 1s normal 1 forwards;
+}
+
+.login-form-div{    
+    background-color: rgb(181, 235, 250);
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    animation: contrast 1.5s normal 1 forwards;
+}
+
+.login-form-div h1{
+    margin: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 12px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.login-input {
+    border: none;
+    background-color: rgb(181, 235, 250);
+    border-bottom: 1px #2b2b2b solid;
+    color:black;
+    width: 80%;
+    margin: 5px;
+    transition: all 0.3s;
+    padding-bottom: 2px;
+    text-align: center;
+}
+
+.login-input:focus {
+    outline: none;
+    border-radius: 2px;
+    width: 120%;
+}
+
+.login-button {
+    color: black;
+    background-color: rgb(181, 235, 250);
+    border: none;
+
+    box-shadow: 5px 5px 10px #2b2b2b;
+    margin: 12px;
+    transition: all 0.1s;
+    animation: contrast 0.5s normal 1;
+}
+
+#redirect-button {
+    background-color: rgb(181, 235, 250);
+}
+
+.login-button:active {
+    box-shadow: none;
+}
+.login-button:disabled {
+    color: rgb(132, 132, 132);
+    background-color: rgb(181, 235, 250);
+    box-shadow: none;
+    border: none;
+    box-shadow: none;
+    animation: none
+}
+
+.errorlist li {
+    background-color: rgb(245, 100, 100);
+}
+
+.report-div {
+    background-color: rgb(250, 242, 181);
+    margin-bottom: 30px;
+}
+.report-div h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+#division {
+    margin: 0;
+    font-weight: 540;
+}
+.report-item {
+    margin-bottom: 10px;
+}
+
+@keyframes contrast {
+    0% {
+        box-shadow: none;
+    }
+    100% {
+        box-shadow: 5px 5px 10px #2b2b2b;
+    }
+}

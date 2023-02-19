@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="{% static 'app.js' %}"></script> 
+    <title>Limpa Bem cadastro de cliente</title>
+</head>
+<body>
+    <div class="login-form-div">
+        <h1>Cadastro</h1>
+        <form class="login-form" action="cadastro" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input class="login-button" type="submit" value="Cadastrar">
+            <button id="redirect_button" name="login" onclick="redirect()" type="button" class="login-button">Já possui cadastro?</button type="button">
+        </form>
+    </div>
+</body>
+</html>
